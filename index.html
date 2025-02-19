@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Webpage</title>
+    <title>Interactive Webpage</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 50px;
+            background-color: white;
         }
         button {
             padding: 10px 20px;
@@ -21,17 +22,43 @@
         button:hover {
             background-color: darkred;
         }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Welcome to My First Webpage</h1>
-    <p id="message">Click the button below to change this text.</p>
-    <button onclick="changeText()">Click Me</button>
+    <h1>Welcome to My Interactive Webpage</h1>
+    <p id="message">Enter your name below:</p>
+    
+    <input type="text" id="nameInput" placeholder="Type your name...">
+    <button onclick="greetUser()">Click Me</button>
 
     <script>
-        function changeText() {
-            document.getElementById("message").innerText = "You clicked the button, nice work!";
+        function greetUser() {
+            let userName = document.getElementById("nameInput").value;
+            let message = document.getElementById("message");
+
+            if (userName.trim() !== "") {
+                message.innerText = `Hello, ${userName}! Welcome to my site.`;
+            } else {
+                message.innerText = "Please enter your name!";
+            }
+
+            // Change background color randomly on each click
+            document.body.style.backgroundColor = getRandomColor();
+        }
+
+        function getRandomColor() {
+            let letters = "0123456789ABCDEF";
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
     </script>
 
